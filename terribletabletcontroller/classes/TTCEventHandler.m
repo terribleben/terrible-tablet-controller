@@ -9,11 +9,15 @@
 
 @interface TTCEventHandler ()
 
+@property (nonatomic, assign) TTCTabletPointerState state;
+
 - (void) printEventType: (NSEvent *)event;
 
 @end
 
 @implementation TTCEventHandler
+
+#pragma mark static methods
 
 + (NSEventMask) acceptableEventMask
 {
@@ -21,21 +25,43 @@
             | NSLeftMouseDownMask | NSLeftMouseDraggedMask | NSLeftMouseUpMask
             | NSOtherMouseDownMask | NSOtherMouseDraggedMask | NSOtherMouseUpMask // haven't seen these three actually happen
             | NSTabletPointMask | NSTabletProximityMask);
+    // TODO: do we care about NSMouseEntered and NSMouseExited?
+}
+
+
+#pragma mark external methods
+
+- (id) init
+{
+    if (self = [super init]) {
+        self.state = kTTCTabletPointerStateOutside;
+    }
+    return self;
 }
 
 - (NSEvent *) handleEvent:(NSEvent *)event
 {
-    [self printEventType:event];
-    
     if (event.type == NSTabletProximity) {
         // proximity events are called once when the stylus enters or leaves the proximity of the tablet.
-        BOOL isEntering = event.isEnteringProximity;
-        NSLog(@"%@", (isEntering) ? @"entering" : @"leaving");
+        self.state = (event.isEnteringProximity) ? kTTCTabletPointerStateProximate : kTTCTabletPointerStateOutside;
     } else {
         // most events contain location and pressure.
         // in the case of a normal mouse/trackpad, pressure is 1 for down/drag events and 0 otherwise.
         float pressure = (event.type == NSMouseMoved) ? 0 : event.pressure;
         NSPoint position = event.locationInWindow;
+        
+        if (_delegate) {
+            [_delegate eventHandler:self reportedPosition:position pressure:pressure];
+        }
+        
+        // recompute state based on the event type.
+        switch (event.type) {
+            case NSLeftMouseDown: case NSLeftMouseDragged: case NSOtherMouseDown: case NSOtherMouseDragged: case NSTabletPoint:
+                self.state = kTTCTabletPointerStateTouching;
+                break;
+            case NSLeftMouseUp: case NSOtherMouseUp: case NSMouseMoved: default:
+                self.state = kTTCTabletPointerStateProximate;
+        }
         
         // only tablet events contain additional parameters.
         //
@@ -44,17 +70,18 @@
         //
         // When there is an analogous mouse event, like clicking or dragging,
         // subtype NSTabletPointEventSubtype is attached to it, indicating it came from a tablet.
+        
         if (event.type == NSTabletPoint || event.subtype == NSTabletPointEventSubtype) {
             NSPoint tilt = event.tilt;
-            NSPoint positionAbsolute = { event.absoluteX, event.absoluteY };
-            // TODO: do we get Z?
             float rotationDegrees = event.rotation;
-            NSUInteger deviceId = event.deviceID;
+            // NSPoint positionAbsolute = { event.absoluteX, event.absoluteY };
+            // NSUInteger deviceId = event.deviceID;
+            // TODO: do we get Z?
             
-            // TODO: do something with this data
+            if (_delegate) {
+                [_delegate eventHandler:self reportedTilt:tilt rotation:rotationDegrees];
+            }
         }
-        
-        NSLog(@"(%f, %f) @ %f", position.x, position.y, pressure);
     }
     
     return event;
@@ -62,6 +89,17 @@
 
 
 #pragma mark internal methods
+
+- (void) setState:(TTCTabletPointerState)state
+{
+    if (state != _state) {
+        _state = state;
+        
+        if (_delegate) {
+            [_delegate eventHandler:self reportedStateChange:_state];
+        }
+    }
+}
 
 - (void) printEventType:(NSEvent *)event
 {
