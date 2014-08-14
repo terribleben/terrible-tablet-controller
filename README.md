@@ -14,6 +14,6 @@ To build:
 - Clone MetatoneOSC into /terribletabletcontroller/lib/MetatoneOSC
 
 To use:
-- ./terribletabletcontroller <host> <port>
+- ./terribletabletcontroller host port
 - The OSC message protocol is detailed in TTCOSCEncoder.h
 - See the /example folder for some ChucK programs that use it
