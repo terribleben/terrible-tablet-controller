@@ -12,7 +12,7 @@ OscRecv recv;
 
 recv.listen();
 
-recv.event("/ttc/simple, f, f, f") @=> OscEvent oe;
+recv.event("/ttc/mouse, f, f, f") @=> OscEvent oe;
 
 while (true)
 {
@@ -25,7 +25,6 @@ while (true)
         oe.getFloat() => posY;
         oe.getFloat() => pressure;
         
-        // TODO: use y
         220.0 * (1.0 + posX) => s.freq;
         0.4 * pressure => s.gain;
     }

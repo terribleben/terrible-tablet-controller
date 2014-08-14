@@ -8,12 +8,19 @@
 #import "TTCOSCEncoder.h"
 #import "F53OSC.h"
 
+NSString * const kTTCOSCAddressPatternBase = @"ttc";
+NSString * const kTTCOSCAddressPatternState = @"state";
+NSString * const kTTCOSCAddressPatternMouse = @"mouse";
+NSString * const kTTCOSCAddressPatternTablet = @"tablet";
+
 @interface TTCOSCEncoder ()
 {
     NSRect screenFrame;
 }
 
 @property (nonatomic, strong) F53OSCClient *oscClient;
+
+- (void) sendMessageWithRelativeAddress: (NSString *)address arguments: (NSArray *)arguments;
 
 @end
 
@@ -43,25 +50,30 @@
 
 - (void) eventHandler:(TTCEventHandler *)handler reportedStateChange:(TTCTabletPointerState)newState
 {
-    // TODO: break out the addressing logic
-    F53OSCMessage *msgStateChange = [F53OSCMessage messageWithAddressPattern:@"/ttc/state" arguments:@[ @(newState) ]];
-    [_oscClient sendPacket:msgStateChange];
+    [self sendMessageWithRelativeAddress:kTTCOSCAddressPatternState arguments:@[ @(newState) ]];
 }
 
 - (void) eventHandler:(TTCEventHandler *)handler reportedPosition:(NSPoint)position pressure:(float)pressure
 {
     NSPoint normalizedPosition = { ((position.x - screenFrame.origin.x) / screenFrame.size.width),
                                     ((position.y - screenFrame.origin.y) / screenFrame.size.height) };
-    F53OSCMessage *msgSimple = [F53OSCMessage messageWithAddressPattern:@"/ttc/simple"
-                                                              arguments:@[ @(normalizedPosition.x), @(normalizedPosition.y), @(pressure) ]];
-    [_oscClient sendPacket:msgSimple];
+
+    [self sendMessageWithRelativeAddress:kTTCOSCAddressPatternMouse arguments:@[ @(normalizedPosition.x), @(normalizedPosition.y), @(pressure) ]];
 }
 
 - (void) eventHandler:(TTCEventHandler *)handler reportedTilt:(NSPoint)tilt rotation:(float)rotationDegrees
 {
-    F53OSCMessage *msgComplex = [F53OSCMessage messageWithAddressPattern:@"/ttc/complex"
-                                                              arguments:@[ @(tilt.x), @(tilt.y), @(rotationDegrees) ]];
-    [_oscClient sendPacket:msgComplex];
+    [self sendMessageWithRelativeAddress:kTTCOSCAddressPatternTablet arguments:@[ @(tilt.x), @(tilt.y), @(rotationDegrees) ]];
+}
+
+
+#pragma mark internal methods
+
+- (void) sendMessageWithRelativeAddress:(NSString *)address arguments:(NSArray *)arguments
+{
+    NSString *addressPattern = [NSString stringWithFormat:@"/%@/%@", kTTCOSCAddressPatternBase, address];
+    F53OSCMessage *message = [F53OSCMessage messageWithAddressPattern:addressPattern arguments:arguments];
+    [_oscClient sendPacket:message];
 }
 
 @end
