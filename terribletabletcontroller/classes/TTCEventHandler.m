@@ -25,7 +25,6 @@
             | NSLeftMouseDownMask | NSLeftMouseDraggedMask | NSLeftMouseUpMask
             | NSOtherMouseDownMask | NSOtherMouseDraggedMask | NSOtherMouseUpMask // haven't seen these three actually happen
             | NSTabletPointMask | NSTabletProximityMask);
-    // TODO: do we care about NSMouseEntered and NSMouseExited?
 }
 
 
@@ -74,9 +73,6 @@
         if (event.type == NSTabletPoint || event.subtype == NSTabletPointEventSubtype) {
             NSPoint tilt = event.tilt;
             float rotationDegrees = event.rotation;
-            // NSPoint positionAbsolute = { event.absoluteX, event.absoluteY };
-            // NSUInteger deviceId = event.deviceID;
-            // TODO: do we get Z?
             
             if (_delegate) {
                 [_delegate eventHandler:self reportedTilt:tilt rotation:rotationDegrees];
