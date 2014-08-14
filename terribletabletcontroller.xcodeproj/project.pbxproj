@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B517E388199C41CC00920A05 /* F53OSCBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E367199C41CC00920A05 /* F53OSCBundle.m */; };
+		B517E389199C41CC00920A05 /* F53OSCClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E369199C41CC00920A05 /* F53OSCClient.m */; };
+		B517E38A199C41CC00920A05 /* F53OSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E36C199C41CC00920A05 /* F53OSCMessage.m */; };
+		B517E38B199C41CC00920A05 /* F53OSCPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E36E199C41CC00920A05 /* F53OSCPacket.m */; };
+		B517E38C199C41CC00920A05 /* F53OSCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E370199C41CC00920A05 /* F53OSCParser.m */; };
+		B517E38D199C41CC00920A05 /* F53OSCServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E373199C41CC00920A05 /* F53OSCServer.m */; };
+		B517E38E199C41CC00920A05 /* F53OSCSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E375199C41CC00920A05 /* F53OSCSocket.m */; };
+		B517E38F199C41CC00920A05 /* F53OSCTimeTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E377199C41CC00920A05 /* F53OSCTimeTag.m */; };
+		B517E390199C41CC00920A05 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E379199C41CC00920A05 /* GCDAsyncSocket.m */; };
+		B517E391199C41CC00920A05 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E37B199C41CC00920A05 /* GCDAsyncUdpSocket.m */; };
+		B517E393199C41CC00920A05 /* NSData+F53OSCBlob.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E380199C41CC00920A05 /* NSData+F53OSCBlob.m */; };
+		B517E394199C41CC00920A05 /* NSDate+F53OSCTimeTag.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E382199C41CC00920A05 /* NSDate+F53OSCTimeTag.m */; };
+		B517E395199C41CC00920A05 /* NSNumber+F53OSCNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E384199C41CC00920A05 /* NSNumber+F53OSCNumber.m */; };
+		B517E396199C41CC00920A05 /* NSString+F53OSCString.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E386199C41CC00920A05 /* NSString+F53OSCString.m */; };
+		B517E399199C422A00920A05 /* TTCOSCEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B517E398199C422A00920A05 /* TTCOSCEncoder.m */; };
 		B544356F199BEB2000B2EC9E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B544356E199BEB2000B2EC9E /* Foundation.framework */; };
 		B5443572199BEB2000B2EC9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B5443571199BEB2000B2EC9E /* main.m */; };
 		B5443576199BEB2000B2EC9E /* terribletabletcontroller.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = B5443575199BEB2000B2EC9E /* terribletabletcontroller.1 */; };
@@ -28,6 +43,41 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B517E365199C41CC00920A05 /* F53OSC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSC.h; sourceTree = "<group>"; };
+		B517E366199C41CC00920A05 /* F53OSCBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCBundle.h; sourceTree = "<group>"; };
+		B517E367199C41CC00920A05 /* F53OSCBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCBundle.m; sourceTree = "<group>"; };
+		B517E368199C41CC00920A05 /* F53OSCClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCClient.h; sourceTree = "<group>"; };
+		B517E369199C41CC00920A05 /* F53OSCClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCClient.m; sourceTree = "<group>"; };
+		B517E36A199C41CC00920A05 /* F53OSCFoundationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCFoundationAdditions.h; sourceTree = "<group>"; };
+		B517E36B199C41CC00920A05 /* F53OSCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCMessage.h; sourceTree = "<group>"; };
+		B517E36C199C41CC00920A05 /* F53OSCMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCMessage.m; sourceTree = "<group>"; };
+		B517E36D199C41CC00920A05 /* F53OSCPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCPacket.h; sourceTree = "<group>"; };
+		B517E36E199C41CC00920A05 /* F53OSCPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCPacket.m; sourceTree = "<group>"; };
+		B517E36F199C41CC00920A05 /* F53OSCParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCParser.h; sourceTree = "<group>"; };
+		B517E370199C41CC00920A05 /* F53OSCParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCParser.m; sourceTree = "<group>"; };
+		B517E371199C41CC00920A05 /* F53OSCProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCProtocols.h; sourceTree = "<group>"; };
+		B517E372199C41CC00920A05 /* F53OSCServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCServer.h; sourceTree = "<group>"; };
+		B517E373199C41CC00920A05 /* F53OSCServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCServer.m; sourceTree = "<group>"; };
+		B517E374199C41CC00920A05 /* F53OSCSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCSocket.h; sourceTree = "<group>"; };
+		B517E375199C41CC00920A05 /* F53OSCSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCSocket.m; sourceTree = "<group>"; };
+		B517E376199C41CC00920A05 /* F53OSCTimeTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = F53OSCTimeTag.h; sourceTree = "<group>"; };
+		B517E377199C41CC00920A05 /* F53OSCTimeTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = F53OSCTimeTag.m; sourceTree = "<group>"; };
+		B517E378199C41CC00920A05 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		B517E379199C41CC00920A05 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		B517E37A199C41CC00920A05 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		B517E37B199C41CC00920A05 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		B517E37C199C41CC00920A05 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		B517E37F199C41CC00920A05 /* NSData+F53OSCBlob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+F53OSCBlob.h"; sourceTree = "<group>"; };
+		B517E380199C41CC00920A05 /* NSData+F53OSCBlob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+F53OSCBlob.m"; sourceTree = "<group>"; };
+		B517E381199C41CC00920A05 /* NSDate+F53OSCTimeTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+F53OSCTimeTag.h"; sourceTree = "<group>"; };
+		B517E382199C41CC00920A05 /* NSDate+F53OSCTimeTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+F53OSCTimeTag.m"; sourceTree = "<group>"; };
+		B517E383199C41CC00920A05 /* NSNumber+F53OSCNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+F53OSCNumber.h"; sourceTree = "<group>"; };
+		B517E384199C41CC00920A05 /* NSNumber+F53OSCNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+F53OSCNumber.m"; sourceTree = "<group>"; };
+		B517E385199C41CC00920A05 /* NSString+F53OSCString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+F53OSCString.h"; sourceTree = "<group>"; };
+		B517E386199C41CC00920A05 /* NSString+F53OSCString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+F53OSCString.m"; sourceTree = "<group>"; };
+		B517E387199C41CC00920A05 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		B517E397199C422A00920A05 /* TTCOSCEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCOSCEncoder.h; sourceTree = "<group>"; };
+		B517E398199C422A00920A05 /* TTCOSCEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTCOSCEncoder.m; sourceTree = "<group>"; };
 		B544356B199BEB2000B2EC9E /* terribletabletcontroller */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = terribletabletcontroller; sourceTree = BUILT_PRODUCTS_DIR; };
 		B544356E199BEB2000B2EC9E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B5443571199BEB2000B2EC9E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -51,6 +101,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B517E362199C41CC00920A05 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				B517E364199C41CC00920A05 /* MetatoneOSC */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		B517E364199C41CC00920A05 /* MetatoneOSC */ = {
+			isa = PBXGroup;
+			children = (
+				B517E365199C41CC00920A05 /* F53OSC.h */,
+				B517E366199C41CC00920A05 /* F53OSCBundle.h */,
+				B517E367199C41CC00920A05 /* F53OSCBundle.m */,
+				B517E368199C41CC00920A05 /* F53OSCClient.h */,
+				B517E369199C41CC00920A05 /* F53OSCClient.m */,
+				B517E36A199C41CC00920A05 /* F53OSCFoundationAdditions.h */,
+				B517E36B199C41CC00920A05 /* F53OSCMessage.h */,
+				B517E36C199C41CC00920A05 /* F53OSCMessage.m */,
+				B517E36D199C41CC00920A05 /* F53OSCPacket.h */,
+				B517E36E199C41CC00920A05 /* F53OSCPacket.m */,
+				B517E36F199C41CC00920A05 /* F53OSCParser.h */,
+				B517E370199C41CC00920A05 /* F53OSCParser.m */,
+				B517E371199C41CC00920A05 /* F53OSCProtocols.h */,
+				B517E372199C41CC00920A05 /* F53OSCServer.h */,
+				B517E373199C41CC00920A05 /* F53OSCServer.m */,
+				B517E374199C41CC00920A05 /* F53OSCSocket.h */,
+				B517E375199C41CC00920A05 /* F53OSCSocket.m */,
+				B517E376199C41CC00920A05 /* F53OSCTimeTag.h */,
+				B517E377199C41CC00920A05 /* F53OSCTimeTag.m */,
+				B517E378199C41CC00920A05 /* GCDAsyncSocket.h */,
+				B517E379199C41CC00920A05 /* GCDAsyncSocket.m */,
+				B517E37A199C41CC00920A05 /* GCDAsyncUdpSocket.h */,
+				B517E37B199C41CC00920A05 /* GCDAsyncUdpSocket.m */,
+				B517E37C199C41CC00920A05 /* LICENSE.txt */,
+				B517E37F199C41CC00920A05 /* NSData+F53OSCBlob.h */,
+				B517E380199C41CC00920A05 /* NSData+F53OSCBlob.m */,
+				B517E381199C41CC00920A05 /* NSDate+F53OSCTimeTag.h */,
+				B517E382199C41CC00920A05 /* NSDate+F53OSCTimeTag.m */,
+				B517E383199C41CC00920A05 /* NSNumber+F53OSCNumber.h */,
+				B517E384199C41CC00920A05 /* NSNumber+F53OSCNumber.m */,
+				B517E385199C41CC00920A05 /* NSString+F53OSCString.h */,
+				B517E386199C41CC00920A05 /* NSString+F53OSCString.m */,
+				B517E387199C41CC00920A05 /* README.markdown */,
+			);
+			path = MetatoneOSC;
+			sourceTree = "<group>";
+		};
 		B5443562199BEB2000B2EC9E = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +181,7 @@
 				B5443571199BEB2000B2EC9E /* main.m */,
 				B5443575199BEB2000B2EC9E /* terribletabletcontroller.1 */,
 				B544357E199BEBE800B2EC9E /* classes */,
+				B517E362199C41CC00920A05 /* lib */,
 				B5443573199BEB2000B2EC9E /* Supporting Files */,
 			);
 			path = terribletabletcontroller;
@@ -101,6 +200,8 @@
 			children = (
 				B544357F199BEC1700B2EC9E /* TTCEventHandler.h */,
 				B5443580199BEC1700B2EC9E /* TTCEventHandler.m */,
+				B517E397199C422A00920A05 /* TTCOSCEncoder.h */,
+				B517E398199C422A00920A05 /* TTCOSCEncoder.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -156,8 +257,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B517E38A199C41CC00920A05 /* F53OSCMessage.m in Sources */,
 				B5443572199BEB2000B2EC9E /* main.m in Sources */,
 				B5443581199BEC1700B2EC9E /* TTCEventHandler.m in Sources */,
+				B517E395199C41CC00920A05 /* NSNumber+F53OSCNumber.m in Sources */,
+				B517E38D199C41CC00920A05 /* F53OSCServer.m in Sources */,
+				B517E396199C41CC00920A05 /* NSString+F53OSCString.m in Sources */,
+				B517E391199C41CC00920A05 /* GCDAsyncUdpSocket.m in Sources */,
+				B517E388199C41CC00920A05 /* F53OSCBundle.m in Sources */,
+				B517E399199C422A00920A05 /* TTCOSCEncoder.m in Sources */,
+				B517E38B199C41CC00920A05 /* F53OSCPacket.m in Sources */,
+				B517E394199C41CC00920A05 /* NSDate+F53OSCTimeTag.m in Sources */,
+				B517E389199C41CC00920A05 /* F53OSCClient.m in Sources */,
+				B517E38E199C41CC00920A05 /* F53OSCSocket.m in Sources */,
+				B517E38F199C41CC00920A05 /* F53OSCTimeTag.m in Sources */,
+				B517E390199C41CC00920A05 /* GCDAsyncSocket.m in Sources */,
+				B517E393199C41CC00920A05 /* NSData+F53OSCBlob.m in Sources */,
+				B517E38C199C41CC00920A05 /* F53OSCParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +387,7 @@
 				B544357B199BEB2000B2EC9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
