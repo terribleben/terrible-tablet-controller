@@ -6,8 +6,26 @@
 //
 
 #import "TTCOSCEncoder.h"
+#import "F53OSC.h"
+
+@interface TTCOSCEncoder ()
+
+@property (nonatomic, strong) F53OSCClient *oscClient;
+
+@end
 
 @implementation TTCOSCEncoder
+
+- (id) init
+{
+    if (self = [super init]) {
+        self.oscClient = [[F53OSCClient alloc] init];
+        _oscClient.host = TTC_OSC_HOST;
+        _oscClient.port = TTC_OSC_PORT;
+        [_oscClient connect];
+    }
+    return self;
+}
 
 #pragma mark delegate methods
 
@@ -15,6 +33,9 @@
 {
     // TODO
     NSLog(@"State change: %u", newState);
+    
+    F53OSCMessage *msgStateChange = [F53OSCMessage messageWithAddressPattern:@"/ttc/state" arguments:@[ @(newState) ]];
+    [_oscClient sendPacket:msgStateChange];
 }
 
 - (void) eventHandler:(TTCEventHandler *)handler reportedPosition:(NSPoint)position pressure:(float)pressure
