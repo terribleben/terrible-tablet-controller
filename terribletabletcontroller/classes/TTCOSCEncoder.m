@@ -30,11 +30,17 @@ NSString * const kTTCOSCAddressPatternTablet = @"tablet";
 {
     if (self = [super init]) {
         self.oscClient = [[F53OSCClient alloc] init];
-        _oscClient.host = TTC_OSC_HOST;
-        _oscClient.port = TTC_OSC_PORT;
-        [_oscClient connect];
-        
         screenFrame = [NSScreen mainScreen].frame;
+    }
+    return self;
+}
+
+- (id) initWithHost:(NSString *)host port:(NSInteger)port
+{
+    if (self = [self init]) {
+        _oscClient.host = host;
+        _oscClient.port = port;
+        [_oscClient connect];
     }
     return self;
 }

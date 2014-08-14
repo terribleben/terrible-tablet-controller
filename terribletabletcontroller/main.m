@@ -11,9 +11,31 @@
 #import "TTCEventHandler.h"
 #import "TTCOSCEncoder.h"
 
+void printUsageAndExit()
+{
+    printf("Usage: ./terribletabletcontroller <host> <port>\n");
+    exit(1);
+}
+
 int main(int argc, const char * argv[])
 {
     @autoreleasepool {
+        if (argc < 3) {
+            printUsageAndExit();
+        }
+        
+        // parse incoming host and port
+        NSString *host;
+        NSInteger port;
+        
+        @try {
+            host = [NSString stringWithUTF8String:argv[1]];
+            port = [[NSString stringWithUTF8String:argv[2]] integerValue];
+        } @catch (NSException *e) {
+            printf("Couldn't parse the provided host and port.\n");
+            printUsageAndExit();
+        }
+        
         // need an application object to monitor events (for some reason)
         [NSApplication sharedApplication];
         
@@ -34,10 +56,8 @@ int main(int argc, const char * argv[])
         [NSEvent setMouseCoalescingEnabled:NO];
         
         // set up an OSC encoder to build and broadcast tablet and mouse events as OSC bundles.
-        TTCOSCEncoder *theOscEncoder = [[TTCOSCEncoder alloc] init];
+        TTCOSCEncoder *theOscEncoder = [[TTCOSCEncoder alloc] initWithHost:host port:port];
         theEventHandler.delegate = theOscEncoder;
-        
-        // TODO: read command line arguments to specify OSC address and port.
         
         // main run loop
         [NSApp run];
