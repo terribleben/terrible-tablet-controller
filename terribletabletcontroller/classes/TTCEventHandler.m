@@ -19,13 +19,28 @@
 {
     return (NSMouseMovedMask
             | NSLeftMouseDownMask | NSLeftMouseDraggedMask | NSLeftMouseUpMask
-            | NSOtherMouseDownMask | NSOtherMouseDraggedMask | NSOtherMouseUpMask
+            | NSOtherMouseDownMask | NSOtherMouseDraggedMask | NSOtherMouseUpMask // haven't seen these three actually happen
             | NSTabletPointMask | NSTabletProximityMask);
 }
 
 - (NSEvent *) handleEvent:(NSEvent *)event
 {
     [self printEventType:event];
+    
+    float pressure = (event.type == NSMouseMoved) ? 0 : event.pressure;
+    NSPoint position = event.locationInWindow;
+
+    if (event.type == NSTabletPoint || event.subtype == NSTabletPointEventSubtype) {
+        NSPoint tilt = event.tilt;
+        NSPoint positionAbsolute = { event.absoluteX, event.absoluteY };
+        // TODO: do we get Z?
+        float rotationDegrees = event.rotation;
+        NSUInteger deviceId = event.deviceID;
+        
+        // TODO: do something with this data
+    }
+    
+    NSLog(@"(%f, %f) @ %f", position.x, position.y, pressure);
     
     return event;
 }
@@ -70,19 +85,21 @@
             break;
     }
     
-    switch (event.subtype) {
-        case NSMouseEventSubtype: case NSTouchEventSubtype:
-            // on a macbook, trackpad events mysteriously count as "touch"
-            printableSubtype = @"default/touch";
-            break;
-        case NSTabletPointEventSubtype:
-            printableSubtype = @"point";
-            break;
-        case NSTabletProximityEventSubtype:
-            printableSubtype = @"prox";
-            break;
-        default:
-            break;
+    if (event.type != NSTabletPoint && event.type != NSTabletProximity) {
+        switch (event.subtype) {
+            case NSMouseEventSubtype: case NSTouchEventSubtype:
+                // on a macbook, trackpad events mysteriously count as "touch"
+                printableSubtype = @"default/touch";
+                break;
+            case NSTabletPointEventSubtype:
+                printableSubtype = @"point";
+                break;
+            case NSTabletProximityEventSubtype:
+                printableSubtype = @"prox";
+                break;
+            default:
+                break;
+        }
     }
     
     NSLog(@"%@ : %@", printableType, printableSubtype);
