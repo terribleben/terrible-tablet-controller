@@ -27,27 +27,34 @@
     return self;
 }
 
+- (void) dealloc
+{
+    [_oscClient disconnect];
+    
+    // [super dealloc];
+}
+
 #pragma mark delegate methods
 
 - (void) eventHandler:(TTCEventHandler *)handler reportedStateChange:(TTCTabletPointerState)newState
 {
-    // TODO
-    NSLog(@"State change: %u", newState);
-    
+    // TODO: break out the addressing logic
     F53OSCMessage *msgStateChange = [F53OSCMessage messageWithAddressPattern:@"/ttc/state" arguments:@[ @(newState) ]];
     [_oscClient sendPacket:msgStateChange];
 }
 
 - (void) eventHandler:(TTCEventHandler *)handler reportedPosition:(NSPoint)position pressure:(float)pressure
 {
-    // TODO
-    NSLog(@"(%.0f, %.0f) @ %.2f", position.x, position.y, pressure);
+    F53OSCMessage *msgSimple = [F53OSCMessage messageWithAddressPattern:@"/ttc/simple"
+                                                              arguments:@[ @(position.x), @(position.y), @(pressure) ]];
+    [_oscClient sendPacket:msgSimple];
 }
 
 - (void) eventHandler:(TTCEventHandler *)handler reportedTilt:(NSPoint)tilt rotation:(float)rotationDegrees
 {
-    // TODO
-    NSLog(@"tilt (%.2f, %.2f) rotation %.0f", tilt.x, tilt.y, rotationDegrees);
+    F53OSCMessage *msgComplex = [F53OSCMessage messageWithAddressPattern:@"/ttc/complex"
+                                                              arguments:@[ @(tilt.x), @(tilt.y), @(rotationDegrees) ]];
+    [_oscClient sendPacket:msgComplex];
 }
 
 @end
