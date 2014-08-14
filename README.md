@@ -12,6 +12,7 @@ Tested on OSX 10.9 with a Wacom Intuos tablet.
 To build:
 - Clone the repo
 - Clone MetatoneOSC into /terribletabletcontroller/lib/MetatoneOSC
+- There's also a prebuilt version in the /build folder
 
 To use:
 - ./terribletabletcontroller host port
