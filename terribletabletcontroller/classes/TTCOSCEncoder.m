@@ -9,6 +9,9 @@
 #import "F53OSC.h"
 
 @interface TTCOSCEncoder ()
+{
+    NSRect screenFrame;
+}
 
 @property (nonatomic, strong) F53OSCClient *oscClient;
 
@@ -23,6 +26,8 @@
         _oscClient.host = TTC_OSC_HOST;
         _oscClient.port = TTC_OSC_PORT;
         [_oscClient connect];
+        
+        screenFrame = [NSScreen mainScreen].frame;
     }
     return self;
 }
@@ -45,8 +50,10 @@
 
 - (void) eventHandler:(TTCEventHandler *)handler reportedPosition:(NSPoint)position pressure:(float)pressure
 {
+    NSPoint normalizedPosition = { ((position.x - screenFrame.origin.x) / screenFrame.size.width),
+                                    ((position.y - screenFrame.origin.y) / screenFrame.size.height) };
     F53OSCMessage *msgSimple = [F53OSCMessage messageWithAddressPattern:@"/ttc/simple"
-                                                              arguments:@[ @(position.x), @(position.y), @(pressure) ]];
+                                                              arguments:@[ @(normalizedPosition.x), @(normalizedPosition.y), @(pressure) ]];
     [_oscClient sendPacket:msgSimple];
 }
 

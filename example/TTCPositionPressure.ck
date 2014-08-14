@@ -26,8 +26,7 @@ while (true)
         oe.getFloat() => pressure;
         
         // TODO: use y
-        // TODO: make position 0-1
-        220.0 * (1.0 + (posX / 1280.0)) => s.freq;
+        220.0 * (1.0 + posX) => s.freq;
         0.4 * pressure => s.gain;
     }
 }
