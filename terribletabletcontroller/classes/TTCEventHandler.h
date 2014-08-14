@@ -10,8 +10,14 @@
 
 @interface TTCEventHandler : NSObject
 
+/**
+ *  Gets the mask/filter for the set of events this class cares to process.
+ */
 + (NSEventMask) acceptableEventMask;
 
+/**
+ *  Process an incoming event.
+ */
 - (NSEvent *) handleEvent: (NSEvent *)event;
 
 @end
