@@ -41,13 +41,16 @@ NSString * const kTTCOSCAddressPatternTablet = @"tablet";
         _oscClient.host = host;
         _oscClient.port = port;
         [_oscClient connect];
+        
+        NSLog(@"Sending to %@:%d...", _oscClient.host, _oscClient.port);
     }
     return self;
 }
 
 - (void) dealloc
 {
-    [_oscClient disconnect];
+    if (_oscClient.isConnected)
+        [_oscClient disconnect];
     
     // [super dealloc];
 }
