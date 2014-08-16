@@ -1,14 +1,27 @@
 
 // Chuck program to work in conjunction with terrible-tablet-controller.
 // Makes a simple instrument out of your tablet.
+// 
+// touch => note on
+// X => instrument pitch
+// Y => filter frequency
+// tilt => vibrato and harmonic
+// pressure => gain
 
 // screen space represents numNotes notes across its width
 25 => int numNotes;
 
-// instrument voice
-SinOsc s => Envelope e => dac;
-0.2 => s.gain;
+// instrument voices
+SqrOsc fundamental => Gain g => Envelope e => BPF f => dac;
+SqrOsc harmonic => g;
+
+1 => fundamental.gain;
+0 => harmonic.gain;
+0.2 => g.gain;
 10::ms => e.duration;
+0.04 => f.Q;
+500 => f.freq;
+
 1 => float vibratoMagnitude;
 0 => float vibratoVelocity;
 0 => float vibratoAmplitude;
@@ -68,14 +81,17 @@ fun void modulateFreqGain() {
             evMouse.getFloat() => posY;
             evMouse.getFloat() => pressure;
             
-            getNoteFrequency(posX) => s.freq;
+            10 + (490 * posY) => f.freq;
             
-            0.2 + (0.4 * pressure) => s.gain;
+            getNoteFrequency(posX) => fundamental.freq;
+            fundamental.freq() * 3.0 => harmonic.freq;
+            
+            0.2 + (0.4 * pressure) => g.gain;
         }
     }
 }
 
-fun void modulateVibrato() {
+fun void modulateVibratoHarmonic() {
     recv.event("/ttc/tablet, f, f, f") @=> OscEvent evTablet;
     
     while (true)
@@ -89,7 +105,10 @@ fun void modulateVibrato() {
             evTablet.getFloat() => tiltY;
             evTablet.getFloat() => rotationDegrees;
             
-            Math.sqrt(tiltY * tiltY + tiltX * tiltX) * 0.01 => vibratoAmplitude;
+            Math.sqrt(tiltY * tiltY + tiltX * tiltX) => float tiltMagnitude;
+            tiltMagnitude * 0.01 => vibratoAmplitude;
+            1.0 - tiltMagnitude => fundamental.gain;
+            tiltMagnitude * 0.8 => harmonic.gain;
         }
     }
 }
@@ -100,7 +119,7 @@ recv.listen();
 
 spork ~ modulateEnvelope();
 spork ~ modulateFreqGain();
-spork ~ modulateVibrato();
+spork ~ modulateVibratoHarmonic();
 
 while (8::ms => now)
 {
